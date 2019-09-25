@@ -35,7 +35,30 @@ app.post('/add',(req,res)=>{
         connection.end();
     });
 });
-
+app.post('/login',(req,res)=>{
+    var username = req.body.username;
+    console.log(username);
+    var password = req.body.password;
+    var connection = mysql.createConnection({
+        host:'localhost',
+        user:'root',
+        password:'123456',
+        database:'blog'
+    });
+    connection.connect();
+    var sql = "select psw from user where user='"+username+"'";
+    console.log(sql);
+    connection.query(sql,(err,result)=>{
+        if(err){
+            console.log(err);
+        }else{
+            if(result[0].psw === password)
+                res.send(true)
+            else
+                res.send(false)
+        }
+    });
+});
 
 app.get('/list',(req,res)=>{
     console.log("get list");

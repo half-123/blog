@@ -1,12 +1,17 @@
 <template>
   <div id="app">
-    <headerBar></headerBar>
+    <headerBar @func="login"></headerBar>
     <div class="main">
         <router-view></router-view>
         <router-view name="sidebar" class="sidebar"></router-view>
     </div>
+      <div class="mengban" v-if="!flag1">
+      </div>
+      <transition>
+          <login v-if="!flag1"  @func="login"></login>
+      </transition>
     <bottomBox></bottomBox>
-      <i class="toTop iconfont icon-top" @click="backTop" v-if="flag"></i>
+      <i class="toTop iconfont icon-top" @click="backTop" v-show="flag"></i>
   </div>
 </template>
 
@@ -17,17 +22,26 @@
   import addNote from './components/addNote.vue'
   import items from './components/items.vue'
   import sideBar from './components/sideBar.vue'
+  import Login from "./components/login";
+  import store from './store'
 
   export default {
     name: 'app',
+      store,
     components: {
-      headerBar, bottomBox, articlItem,addNote, items,sideBar
+        Login, headerBar, bottomBox, articlItem,addNote, items,sideBar
     },
     data() {
       return{
-        flag : false
+          flag : false,
+          flag1: true
       }
     },
+      computed:{
+          state() {
+              return this.$store.state.login
+          }
+      },
 
     mounted () {
       window.addEventListener('scroll', this.scrollToTop)
@@ -59,7 +73,10 @@
         } else {
           that.flag = false
         }
-      }
+      },
+        login(value) {
+          this.flag1 = value;
+        }
     }
 
   }
@@ -70,7 +87,7 @@
   .v-enter,
   .v-leave-to {
     opacity: 0;
-    transform: translateY(80px);
+    transform: translateY(-80px);
   }
 
   .v-enter-active,
@@ -78,8 +95,23 @@
     transition: all 1s ease;
   }
   body ,html{
-    margin: 0;
-    padding: 0;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+  }
+  #app {
+      width: 100%;
+      height: 100%;
+  }
+  .mengban {
+      position: fixed;
+      top:0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,.3);
   }
   * {
     box-sizing: border-box;

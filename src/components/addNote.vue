@@ -13,9 +13,11 @@
                     <label for="js">JS</label>
                     <input id="vue" type="checkbox" value="VUE" v-model="tips">
                     <label for="vue">VUE</label>
+                    <input id="webpack" type="checkbox" value="webpack" v-model="tips">
+                    <label for="webpack">webpack</label>
                 </div>
                 <div>
-                    <button @click="submit">提交</button>
+                    <button @click="submit" class="btn btn-success">提交</button>
                 </div>
             </div>
             <mavon-editor
@@ -69,7 +71,7 @@
             },
             submit(){
 
-                axios.post('api/add',Qs.stringify({
+                axios.post('http://120.79.11.93:3001/add',Qs.stringify({
                     html:this.html.toString(),
                     md:  this.content.toString(),
                     title: this.title,
@@ -98,21 +100,21 @@
         display: flex;
         justify-content: space-between;
     }
-    button,input{
+    input{
         margin-top: 20px;
         height: 40px;
         text-decoration: none;
         font-size: 15px;
     }
-    button {
-        width: 60px;
-        margin-left: 20px;
-        background: #009a61;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        font-size: 15px;
-    }
+    /*button {*/
+    /*    width: 60px;*/
+    /*    margin-left: 20px;*/
+    /*    background: #009a61;*/
+    /*    color: #fff;*/
+    /*    border: none;*/
+    /*    border-radius: 8px;*/
+    /*    font-size: 15px;*/
+    /*}*/
     a {
         display: block;
         width: 100%;

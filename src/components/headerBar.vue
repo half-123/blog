@@ -4,12 +4,13 @@
         <div class="list" v-if="list||big">
             <ul>
                 <li><router-link  to="/">首页</router-link></li>
-                <li><router-link  to="/items/html">HTML</router-link></li>
-                <li><router-link  to="/items/css">CSS</router-link></li>
+                <li><router-link  to="/items/html" >HTML</router-link></li>
+                <li><router-link  to="/items/css" >CSS</router-link></li>
                 <li><router-link  to="/items/js">JS</router-link></li>
-                <li><router-link  to="/items/vue">VUE</router-link></li>
+                <li><router-link  to="/items/vue" >VUE</router-link></li>
                 <li><router-link  to="/items/webpack">WEBPACK</router-link></li>
-                <li><router-link  to="/add">写文章</router-link></li>
+                <li v-show="!state"><span class="login" @click="login" >登录</span></li>
+                <li v-show="state"><router-link  to="/add" >写文章</router-link></li>
                 <li><router-link  to="/about">关于我</router-link></li>
             </ul>
         </div>
@@ -21,9 +22,6 @@
 <script>
     export default {
         name: "headerBar",
-        methods: {
-
-        },
         data(){
           return{
               list : false,
@@ -36,7 +34,21 @@
                     return true;
                 else
                     return false;
+            },
+            state() {
+                return this.$store.state.login
             }
+        },
+        watch:{
+            '$route'(){
+                this.list = false
+                }
+            },
+        methods: {
+            login : function () {
+                this.$emit('func',false)
+                this.list = false
+            },
         }
     }
 </script>
@@ -91,6 +103,9 @@
     }
     header li:hover {
         background: rgba(0,0,0,.04);
+    }
+    .login {
+        cursor:pointer;
     }
     @media screen and (max-width: 1204px) {
         #headerBar {

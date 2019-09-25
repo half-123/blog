@@ -12,7 +12,7 @@ module.exports = {
         disableHostCheck: true,
         proxy:  {
             '/api': {
-                target: 'http://localhsot:3001', //API服务器的地址
+                target: 'http://localhost:3001', //API服务器的地址
                 changeOrigin: true,
                 secure: false,
                 ws: true,

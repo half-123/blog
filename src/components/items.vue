@@ -46,7 +46,7 @@
               this.more = true;
               if(this.$route.params.type){
                   axios
-                      .get('api/items?type='+this.$route.params.type)
+                      .get('http://120.79.11.93:3001/items?type='+this.$route.params.type)
                       .then(response => {
                           this.content = response.data
                       })
@@ -55,7 +55,7 @@
                       })
               }else{
                   axios
-                      .get('api/list')
+                      .get('http://120.79.11.93:3001/list')
                       .then(response => {
                               this.content = response.data;
                           }
@@ -68,7 +68,7 @@
         },
         mounted () {
                 axios
-                    .get('api/list')
+                    .get('http://120.79.11.93:3001/list')
                     .then(response => {
                         this.content = response.data;
                         }
@@ -127,8 +127,14 @@
         height: 120px;
         overflow: hidden;
     }
-    .content >>> h1 {
+    .content >>> h1{
         display: none;
+    }
+    .content >>> * {
+        font-size: 15px;
+        line-height: 20px;
+        margin: 0;
+        padding: 0;
     }
     .iconfont {
         display: block;

@@ -52,7 +52,7 @@
         },
         mounted () {
             axios
-                .get('http://120.79.11.93:3001/item?id='+this.id)
+                .get('http://localhost:3001/item?id='+this.id)
                 .then(response => {
                     this.content = response.data[0]
                     this.tips = this.content.tips.split(",")
@@ -68,6 +68,7 @@
     #articleItem {
         width: 75%;
         margin: 30px 0;
+        z-index: 0;
         /*background: #f8f8f8;*/
         /*padding: 10px 40px;*/
         /*border-radius: 15px;*/
